@@ -1,0 +1,48 @@
+<flynt-component name="HeroImageText">
+  <picture class="picture">
+    {% if images.imageDesktop.post_mime_type == 'image/svg+xml' %}
+      <source
+        srcset="{{ images.imageDesktop.src }}"
+        media="(min-width: 768px)"
+        width="768"
+        height="{{ (768 / 32 * 9)|round }}">
+    {% else %}
+      <source srcset="
+        {{ images.imageDesktop.src|resizeDynamic(2560, (2560 / 32 * 9)|round, 'center') }} 2560w,
+        {{ images.imageDesktop.src|resizeDynamic(1920, (1920 / 32 * 9)|round, 'center') }} 1920w,
+        {{ images.imageDesktop.src|resizeDynamic(1600, (1600 / 32 * 9)|round, 'center') }} 1600w,
+        {{ images.imageDesktop.src|resizeDynamic(1440, (1440 / 32 * 9)|round, 'center') }} 1440w,
+        {{ images.imageDesktop.src|resizeDynamic(1366, (1366 / 32 * 9)|round, 'center') }} 1366w,
+        {{ images.imageDesktop.src|resizeDynamic(1024, (1024 / 32 * 9)|round, 'center') }} 1024w,
+        {{ images.imageDesktop.src|resizeDynamic(768, (768 / 32 * 9)|round, 'center' ) }} 768w"
+      media="(min-width: 768px)"
+      width="768"
+      height="{{ (768 / 32 * 9)|round }}"
+      sizes="100vw">
+    {% endif %}
+    {% if images.imageMobile.post_mime_type == 'image/svg+xml' %}
+      <img
+        class="picture-image"
+        src="{{ images.imageMobile.src }}"
+        width="768"
+        height="{{ (768 / 4 * 3)|round }}"
+        alt="{{ images.imageMobile.alt|e }}">
+    {% else %}
+      <img class="picture-image"
+        src="{{ images.imageMobile.src | resizeDynamic(768, (768 / 4 * 3)|round, 'center') }}"
+        srcset="
+          {{ images.imageMobile.src|resizeDynamic(1440, (1440 / 4 * 3)|round, 'center') }} 1440w,
+          {{ images.imageMobile.src|resizeDynamic(1366, (1366 / 4 * 3)|round, 'center') }} 1366w,
+          {{ images.imageMobile.src|resizeDynamic(1024, (1024 / 4 * 3)|round, 'center') }} 1024w,
+          {{ images.imageMobile.src|resizeDynamic(768, (768 / 4 * 3)|round, 'center') }} 768w,
+          {{ images.imageMobile.src|resizeDynamic(640, (640 / 4 * 3)|round, 'center') }} 640w"
+        sizes="100vw"
+        width="768"
+        height="{{ (768 / 4 * 3)|round }}"
+        alt="{{ images.imageDesktop.alt|e }}">
+    {% endif %}
+  </picture>
+  <div class="content" data-text-align="center">
+    {{ contentHtml|e('wp_kses_post') }}
+  </div>
+</flynt-component>

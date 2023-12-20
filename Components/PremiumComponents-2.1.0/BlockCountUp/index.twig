@@ -1,0 +1,46 @@
+<flynt-component name="BlockCountUp" load:on="visible" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container" data-flow="layout">
+    {% if preContentHtml %}
+      <div data-size="medium" data-align="center" data-text-align="center">
+        {{ preContentHtml|e('wp_kses_post')}}
+      </div>
+    {% endif %}
+    <div class="grid" data-ref="blockCountContainer" data-decimal="{{ decimalSeparator }}" data-separator="{{ thousandsSeparator }}">
+    {% for item in items %}
+      <div class="item" data-refs="items">
+         <figure class="figure">
+          {% if item.image.post_mime_type == 'image/svg+xml'%}
+            <img class="figure-image-svg lazyload"
+              src="{{ placeholderImage(64, (64 / item.image.aspect)|round, 'rgba(125, 125, 125, 0.1)') }}"
+              width="{{ 64 }}"
+              height="{{ (64 / item.image.aspect)|round }}"
+              data-src="{{ item.image.src }}"
+              alt="{{ item.image.alt|e }}"
+            >
+          {% else %}
+            <img class="figure-image lazyload"
+                src="{{ item.image.src|resizeDynamic(64) }}"
+                width="{{ 64 }}"
+                height="{{ (64 / item.image.aspect)|round }}"
+                srcset="{{ placeholderImage(64, (64 / item.image.aspect)|round, 'rgba(125, 125, 125, 0.1)') }}"
+                data-srcset="
+                  {{ item.image.src|resizeDynamic(128) }} 128w"
+                data-sizes="auto"
+                alt="{{ item.image.alt|e }}">
+          {% endif %}
+        </figure>
+        <div class="countValue">
+          <span
+            class="number h2"
+            data-number="{{ item.numberGroup.number|e }}"
+            data-suffix="{{ item.numberGroup.numberSuffix|e }}"
+            data-prefix="{{ item.numberGroup.numberPrefix|e }}">
+            {{ item.numberGroup.numberPrefix|e }}0{{ item.numberGroup.numberSuffix|e }}
+          </span>
+        </div>
+        <div class="subtitle">{{ item.subtitle }}</div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</flynt-component>

@@ -1,0 +1,45 @@
+<ul class="menu">
+  {% for item in items %}
+    <li class="item">
+      <h3 class="title paragraph">
+        {% if item.url|trim != '#' %}
+          <a class="link" href="{{ item.url|e('esc_url') }}" {{- item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' -}}>
+            {{ item.title|e }}
+          </a>
+        {% else %}
+          {{ item.title|e }}
+        {% endif %}
+      </h3>
+      {% if item.children %}
+        <ul class="menu-children">
+          {% for child in item.children %}
+            <li class="item">
+              <a class="link" href="{{ child.url|e('esc_url') }}" {{- child.is_external or child.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' -}}>
+                {{ child.title|e }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+
+  {% if socialPlatformsTitle and socialPlatforms %}
+    <li class="item">
+      <h3 class="title paragraph">
+          {{ socialPlatformsTitle|e }}
+      </h3>
+      {% if socialPlatforms %}
+        <ul class="menu-socialPlatforms">
+          {% for item in socialPlatforms %}
+            <li class="item">
+              <a class="link" href="{{ item.url|e('esc_url') }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.platform.label }}">
+                {{- item.icon }} {{ item.platform.label|e -}}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endif %}
+</ul>

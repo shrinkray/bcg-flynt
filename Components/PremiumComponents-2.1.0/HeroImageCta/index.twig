@@ -1,0 +1,86 @@
+<flynt-component name="HeroImageCta" {{- not options.fullWidth ? ' class="componentSpacing"' -}} {{- options.backgroundTheme ? ' data-theme="' ~ options.backgroundTheme ~ '"' -}}>
+  <div class="container" data-text-align="center" {{- options.fullWidth ? ' data-size="full"' -}} {{- options.contentTheme ? ' data-theme="' ~ options.contentTheme ~ '"' -}}
+       style="--min-block-size-mobile: {{- options.minHeight.mobile -}}px; --min-block-size-desktop: {{- options.minHeight.desktop -}}px;">
+    <picture class="picture">
+      {% if images.imageMobile %}
+        {% if images.imageDesktop.post_mime_type == 'image/svg+xml' %}
+          <source
+            srcset="{{ images.imageDesktop.src }}"
+            media="(min-width: 768px)"
+            width="768"
+            height="{{ (images.imageDesktop.aspect * 768)|round }}">
+          <img
+            class="picture-image"
+            src="{{ images.imageMobile.src }}"
+            width="768"
+            height="{{ (images.imageMobile.aspect * 768)|round }}"
+            alt="{{ images.imageDesktop.alt|e }}">
+        {% else %}
+          <source
+            srcset="
+              {{ images.imageDesktop.src|resizeDynamic(2560) }} 2560w,
+              {{ images.imageDesktop.src|resizeDynamic(1920) }} 1920w,
+              {{ images.imageDesktop.src|resizeDynamic(1600) }} 1600w,
+              {{ images.imageDesktop.src|resizeDynamic(1440) }} 1440w,
+              {{ images.imageDesktop.src|resizeDynamic(1366) }} 1366w,
+              {{ images.imageDesktop.src|resizeDynamic(1024) }} 1024w,
+              {{ images.imageDesktop.src|resizeDynamic(768) }} 768w"
+            media="(min-width: 768px)"
+            width="768"
+            height="{{ (images.imageDesktop.aspect * 768)|round }}"
+            sizes="{{ options.fullWidth ? '100vw' : '(min-width: 1280px) calc(1200px + 4.5rem), 100vw' }}">
+          <img
+            class="picture-image
+              {{ options.alignImage.mobile.vertical }}
+              {{ options.alignImage.mobile.horizontal }}
+              {{ options.alignImage.desktop.vertical }}
+              {{ options.alignImage.desktop.horizontal }}"
+            src="{{ images.imageMobile.src|resizeDynamic(768) }}"
+            srcset="
+              {{ images.imageMobile.src|resizeDynamic(1440) }} 1440w,
+              {{ images.imageMobile.src|resizeDynamic(1366) }} 1366w,
+              {{ images.imageMobile.src|resizeDynamic(1024) }} 1024w,
+              {{ images.imageMobile.src|resizeDynamic(768) }} 768w,
+              {{ images.imageMobile.src|resizeDynamic(640) }} 640w"
+            sizes="{{ options.fullWidth ? '100vw' : '(min-width: 1280px) calc(1200px + 4.5rem), 100vw' }}"
+            width="768"
+            height="{{ (images.imageMobile.aspect * 768)|round }}"
+            alt="{{ images.imageDesktop.alt|e }}">
+        {% endif %}
+      {% else %}
+        {% if images.imageDesktop.post_mime_type == 'image/svg+xml' %}
+          <img
+            class="picture-image"
+            src="{{ images.imageDesktop.src }}"
+            width="768"
+            height="{{ (images.imageDesktop.aspect * 768)|round }}"
+            alt="{{ images.imageDesktop.alt|e }}">
+        {% else %}
+          <img
+            class="picture-image
+              {{ options.alignImage.mobile.vertical }}
+              {{ options.alignImage.mobile.horizontal }}
+              {{ options.alignImage.desktop.vertical }}
+              {{ options.alignImage.desktop.horizontal }}"
+            src="{{ images.imageDesktop.src|resizeDynamic(768) }}"
+            srcset="
+              {{ images.imageDesktop.src|resizeDynamic(2560) }} 2560w,
+              {{ images.imageDesktop.src|resizeDynamic(1920) }} 1920w,
+              {{ images.imageDesktop.src|resizeDynamic(1600) }} 1600w,
+              {{ images.imageDesktop.src|resizeDynamic(1440) }} 1440w,
+              {{ images.imageDesktop.src|resizeDynamic(1366) }} 1366w,
+              {{ images.imageDesktop.src|resizeDynamic(1024) }} 1024w,
+              {{ images.imageDesktop.src|resizeDynamic(768) }} 768w,
+              {{ images.imageDesktop.src|resizeDynamic(640) }} 640w"
+            sizes="{{ options.fullWidth ? '100vw' : '(min-width: 1280px) calc(1200px + 4.5rem), 100vw' }}"
+            width="768"
+            height="{{ (images.imageDesktop.aspect * 768)|round }}"
+            alt="{{ images.imageDesktop.alt|e }}">
+        {% endif %}
+      {% endif %}
+    </picture>
+    <div class="content" data-size="medium" data-align="center">
+      {{ contentHtml|e('wp_kses_post') }}
+    </div>
+  </div>
+</flynt-component>

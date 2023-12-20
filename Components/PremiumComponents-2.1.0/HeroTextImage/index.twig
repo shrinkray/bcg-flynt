@@ -1,0 +1,34 @@
+<flynt-component name="HeroTextImage" {{- not options.noComponentSpacing ? ' class="componentSpacing"' }} {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container" {{ imagePosition ? 'data-image-position="' ~ imagePosition ~ '"' }}>
+    <div class="content {{- options.noComponentSpacing ? ' componentSpacing' }}">
+      {{ contentHtml|e('wp_kses_post') }}
+    </div>
+    <figure class="figure">
+      {% if image.post_mime_type == 'image/svg+xml' %}
+        <img class="image"
+          src="{{ image.src }}"
+          width="{{ (750 * image.aspect)|round }}"
+          height="{{ 750 }}"
+          alt="{{ image.alt|e }}">
+      {% else %}
+        <img class="figure-image"
+          src="{{ image.src|resizeDynamic(768) }}"
+          width="{{ (750 * image.aspect)|round }}"
+          height="{{ 750 }}"
+          srcset="
+            {{ image.src|resizeDynamic(1920) }} 1920w,
+            {{ image.src|resizeDynamic(1600) }} 1600w,
+            {{ image.src|resizeDynamic(1440) }} 1440w,
+            {{ image.src|resizeDynamic(1366) }} 1366w,
+            {{ image.src|resizeDynamic(1024) }} 1024w,
+            {{ image.src|resizeDynamic(768) }} 768w,
+            {{ image.src|resizeDynamic(640) }} 640w"
+          sizes="(min-width: 1024px) {{ (750 * image.aspect)|round }}px, min(100vw, 700px)"
+          alt="{{ image.alt|e }}">
+      {% endif %}
+      {% if image.caption %}
+        <figcaption class="figure-caption">{{ image.caption|e }}</figcaption>
+      {% endif %}
+    </figure>
+  </div>
+</flynt-component>

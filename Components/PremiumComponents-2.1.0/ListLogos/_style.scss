@@ -1,0 +1,42 @@
+flynt-component[name='ListLogos'] {
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--column-gap);
+    justify-content: center;
+    list-style: none;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .item {
+    --box-spacing: 1rem;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    max-inline-size: 140px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .link {
+    block-size: 100%;
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    position: absolute;
+    text-decoration: none;
+    z-index: 1;
+
+    &:hover {
+      + .figure {
+        .figure-caption {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @import 'Partials/image';
+}

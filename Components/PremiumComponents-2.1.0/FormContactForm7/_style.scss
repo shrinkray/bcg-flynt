@@ -1,0 +1,265 @@
+flynt-component[name='FormContactForm7'] {
+  .form {
+    --form-gap: var(--flow-space);
+
+    [class^='form-row-'] {
+      display: grid;
+      gap: var(--form-gap);
+      grid-template-columns: repeat(var(--grid-columns, 1), 1fr);
+    }
+
+    &-row-2 {
+      @media (min-width: $breakpoint-mobile-horizontal) {
+        --grid-columns: 2;
+      }
+    }
+
+    &-row-3 {
+      @media (min-width: $breakpoint-mobile-horizontal) {
+        --grid-columns: 2;
+      }
+
+      @media (min-width: $breakpoint-tablet) {
+        --grid-columns: 3;
+      }
+    }
+
+    &-row-2-lg-left {
+      @media (min-width: $breakpoint-mobile-horizontal) {
+        --grid-columns: 2;
+      }
+
+      @media (min-width: $breakpoint-tablet) {
+        --grid-columns: 3;
+
+        *:nth-child(odd) {
+          grid-column: 1 / span 2;
+        }
+      }
+    }
+
+    &-row-2-lg-right {
+      @media (min-width: $breakpoint-mobile-horizontal) {
+        --grid-columns: 2;
+      }
+
+      @media (min-width: $breakpoint-tablet) {
+        --grid-columns: 3;
+
+        *:nth-child(even) {
+          grid-column: 2 / span 3;
+        }
+      }
+    }
+
+    &-flex {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: var(--form-gap);
+
+      @media (min-width: $breakpoint-mobile-horizontal) {
+        flex-direction: row;
+      }
+
+      + .wpcf7-validation-errors {
+        display: none !important;
+      }
+    }
+
+    &-flex-col {
+      inline-size: 100%;
+
+      @media (min-width: $breakpoint-mobile-horizontal) {
+        flex-grow: 1;
+        inline-size: unset;
+      }
+
+      .button {
+        inline-size: 100%;
+        min-block-size: 52px;
+      }
+
+      .wpcf7-spinner {
+        display: none;
+      }
+    }
+
+    &-button {
+      .wpcf7-spinner {
+        background: none;
+        block-size: 20px;
+        inline-size: 20px;
+        margin: 0 0 0 15px;
+        vertical-align: middle;
+
+        &::after {
+          animation: spinDualRing 1s linear infinite;
+          block-size: 20px;
+          border: 2px solid transparent;
+          border-color: var(--color-accent) transparent var(--color-accent) transparent;
+          border-radius: 50%;
+          content: ' ';
+          display: block;
+          inline-size: 20px;
+        }
+
+        @keyframes spinDualRing {
+          0% {
+            rotate: 0deg;
+          }
+
+          100% {
+            rotate: 360deg;
+          }
+        }
+      }
+
+      @media (max-width: $breakpoint-mobile-horizontal - 1) {
+        text-align: center;
+
+        .button {
+          inline-size: 100%;
+        }
+
+        .ajax-loader {
+          display: none;
+          margin: 15px 0 0;
+
+          &.is-active {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .wpcf7 {
+    // Contact form inserts <br> to new lines, so if you hide the label
+    // the <br> element needs to be hidden as well.
+    .visuallyHidden + br {
+      display: none;
+    }
+
+    &-form {
+      display: grid;
+      gap: var(--form-gap);
+
+      [type="tel"],
+      [type="url"],
+      [type="text"],
+      [type="date"],
+      [type="email"],
+      [type="search"],
+      [type="number"],
+      [type="password"],
+      textarea,
+      select,
+      .select {
+        inline-size: 100%;
+      }
+
+      textarea {
+        display: block;
+      }
+    }
+
+    &-form-control-wrap {
+      display: block;
+
+      input,
+      textarea,
+      select {
+        margin-block-end: 0;
+      }
+    }
+
+    form .wpcf7 {
+      &-list-item {
+        inline-size: auto;
+        margin: 0 var(--flow-space) 0 0;
+
+        &:last-child {
+          margin-inline-end: 0;
+        }
+
+        label { // stylelint-disable-line selector-max-compound-selectors
+          font: inherit;
+        }
+      }
+
+      &-not-valid {
+        border-color: var(--color-error);
+      }
+
+      &-not-valid-tip {
+        color: var(--color-error);
+        margin-block-start: 5px;
+      }
+
+      &-response-output {
+        border: 0;
+        color: var(--color-error);
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      &-validation-errors,
+      &-acceptance-missing,
+      &-spam-blocked,
+      &-mail-sent-ng,
+      &-aborted {
+        color: var(--color-error);
+      }
+
+      &-mail-sent-ok {
+        color: var(--color-text);
+      }
+
+      &-quiz-label {
+        display: block;
+        margin-block-end: 0.5rem;
+      }
+    }
+
+    .label-wrap {
+      label {
+        margin-block-end: 0;
+      }
+    }
+
+    [type='file'] {
+      color: var(--color-text);
+      max-inline-size: 100%;
+      padding: 0;
+    }
+  }
+
+  .wpcf7-acceptance {
+    .wpcf7-list-item {
+      display: block;
+    }
+
+    .wpcf7-list-item-label {
+      display: inline-block;
+      inline-size: 100%;
+      max-inline-size: calc(100% - 30px);
+    }
+  }
+
+  [type='checkbox'],
+  [type='radio'] {
+    + span {
+      color: var(--color-text);
+      display: inline-block;
+      font: inherit;
+      inline-size: auto;
+
+      &::before,
+      &::after {
+        all: unset;
+      }
+    }
+  }
+}

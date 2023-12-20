@@ -1,0 +1,69 @@
+flynt-component[name='ListIcons'] {
+  .items {
+    --grid-columns: 1;
+    display: grid;
+    gap: var(--column-gap);
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, max-content));
+    justify-content: center;
+    list-style: none;
+    margin-inline: auto;
+    padding: 0;
+
+    &[data-max-columns='2'],
+    &[data-max-columns='3'],
+    &[data-max-columns='4'] {
+      @media (min-width: $breakpoint-tablet) {
+        --grid-columns: 2;
+      }
+
+      @media (min-width: $breakpoint-tablet-horizontal) {
+        max-inline-size: max-content;
+      }
+    }
+
+    &[data-max-columns='3'] {
+      @media (min-width: $breakpoint-tablet-horizontal) {
+        --grid-columns: 3;
+      }
+    }
+
+    &[data-max-columns='4'] {
+      @media (min-width: $breakpoint-tablet-horizontal) {
+        --grid-columns: 4;
+      }
+    }
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    max-inline-size: 35ch;
+
+    .figure {
+      --icon-size: 48px;
+      block-size: var(--icon-size);
+      color: var(--color-accent);
+      display: grid;
+      inline-size: var(--icon-size);
+      place-items: center;
+    }
+
+    .content {
+      flex-grow: 1;
+    }
+  }
+
+  [data-align-content='center'] {
+    text-align: center;
+
+    .figure {
+      margin-inline: auto;
+    }
+  }
+
+  [data-icon-size='huge'] {
+    .figure {
+      --icon-size: 120px;
+    }
+  }
+}

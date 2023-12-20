@@ -1,0 +1,138 @@
+flynt-component[name='BlockImageTextParallax'] {
+  .container {
+    @media (min-width: $breakpoint-tablet) {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      flex-wrap: nowrap;
+    }
+
+    > * {
+      inline-size: 100%;
+      margin-inline: auto;
+      max-inline-size: var(--content-max-width);
+
+      @media (min-width: $breakpoint-tablet) {
+        margin-block-start: 0;
+      }
+
+      @media (min-width: $breakpoint-tablet-horizontal) {
+        flex-basis: 50%;
+        inline-size: 50%;
+        max-inline-size: initial;
+      }
+    }
+  }
+
+  .content {
+    inline-size: calc(100% + (2 * var(--container-spacing)));
+    margin-inline: calc(-1 * var(--container-spacing));
+    padding-block: var(--flow-space);
+    padding-inline: var(--container-spacing);
+    position: relative;
+
+    @media (min-width: $breakpoint-tablet) {
+      margin-inline-end: auto;
+      margin-inline-start: 0;
+      max-inline-size: 600px;
+      padding: var(--component-spacing);
+    }
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      padding-inline: var(--column-gap);
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      flex-basis: 40%;
+    }
+
+    &::after {
+      background-color: var(--color-background);
+      block-size: 200px;
+      content: '';
+      display: block;
+      inline-size: 100%;
+      inset: auto auto auto 0;
+      position: absolute;
+      z-index: -1;
+
+      @media (min-width: $breakpoint-tablet) {
+        display: none;
+      }
+
+      @media (min-width: $breakpoint-tablet-horizontal) {
+        block-size: 100%;
+        display: block;
+        inline-size: 80%;
+        inset-block-start: 0;
+      }
+    }
+
+    &[data-theme="themeReset"] {
+      padding-block-start: 0;
+
+      @media (min-width: $breakpoint-tablet) {
+        padding-block-end: var(--box-spacing);
+        padding-inline: var(--column-gap);
+      }
+
+      @media (min-width: $breakpoint-desktop) {
+        padding-block: 0;
+      }
+    }
+  }
+
+  .figure {
+    z-index: -1;
+
+    @media (min-width: $breakpoint-tablet) {
+      margin-block-start: calc(-1 * var(--component-spacing));
+    }
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      margin-block-start: 0;
+      z-index: 1;
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      flex-basis: 60%;
+    }
+  }
+
+  [data-image-position='left'] {
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      flex-direction: row-reverse;
+
+      .content {
+        &[data-theme="themeReset"] {
+          padding-inline-end: 0;
+        }
+
+        &::after {
+          inset-inline-end: 100%;
+          inset-inline-start: auto;
+        }
+      }
+    }
+  }
+
+  [data-image-position='right'] {
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      flex-direction: row;
+
+      .content {
+        &[data-theme="themeReset"] {
+          padding-inline-start: 0;
+        }
+
+        &::after {
+          inset-inline-start: 100%;
+        }
+      }
+    }
+  }
+}

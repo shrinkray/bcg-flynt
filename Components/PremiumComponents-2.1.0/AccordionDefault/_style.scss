@@ -1,0 +1,70 @@
+flynt-component[name='AccordionDefault'] {
+  .items {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  .item {
+    display: block;
+    padding-block-end: var(--flow-space);
+
+    &:not(:first-child) {
+      padding-block-start: var(--flow-space);
+    }
+
+    + .item {
+      border-block-start: 2px solid var(--color-border);
+    }
+  }
+
+  .trigger {
+    --icon-size: 16px;
+    cursor: pointer;
+    inline-size: 100%;
+    margin: 0;
+    padding-inline-end: calc(var(--icon-size) + 1ch);
+    position: relative;
+
+    &::before,
+    &::after {
+      background-color: var(--color-accent);
+      block-size: 2px;
+      content: '';
+      inline-size: var(--icon-size);
+      inset-block-start: calc(50% - 1.5px);
+      inset-inline-end: 0;
+      position: absolute;
+      transition: rotate 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      will-change: rotate;
+    }
+
+    &::after {
+      rotate: -90deg;
+    }
+  }
+
+  // Do not add margins or padding to this, it will may break the layout.
+  .content {
+    display: none;
+    margin: 0;
+    padding: 0;
+
+    &-inner {
+      margin-block-start: var(--flow-space);
+    }
+  }
+
+  [aria-expanded=true] {
+    &::before {
+      rotate: 45deg;
+    }
+
+    &::after {
+      rotate: -45deg;
+    }
+  }
+
+  [aria-hidden=false] {
+    display: block;
+  }
+}

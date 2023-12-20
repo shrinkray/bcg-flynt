@@ -1,0 +1,7 @@
+<flynt-component name="HeroCta" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container">
+    <div data-size="wide" data-align="center" data-text-align="center">
+      {{ contentHtml|e('wp_kses_post') }}
+    </div>
+  </div>
+</flynt-component>

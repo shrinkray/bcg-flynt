@@ -1,0 +1,33 @@
+flynt-component[name='ListSocial'] {
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+  }
+
+  .item {
+    &-link {
+      align-items: center;
+      block-size: 56px;
+      display: flex;
+      inline-size: 56px;
+      justify-content: center;
+      padding: 14px;
+      text-decoration: none;
+
+      svg {
+        block-size: 24px;
+        display: block;
+        inline-size: auto;
+        max-inline-size: 24px;
+
+        path {
+          fill: var(--color-background);
+        }
+      }
+    }
+  }
+}

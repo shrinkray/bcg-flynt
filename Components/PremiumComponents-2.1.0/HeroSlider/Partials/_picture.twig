@@ -1,0 +1,46 @@
+<picture class="picture">
+  {% if images.imageMobile %}
+    <source
+      srcset="
+        {{ images.imageDesktop.src|resizeDynamic(2560, 640, images.imageDesktopCrop) }} 2560w,
+        {{ images.imageDesktop.src|resizeDynamic(1920, 640, images.imageDesktopCrop) }} 1920w,
+        {{ images.imageDesktop.src|resizeDynamic(1600, 640, images.imageDesktopCrop) }} 1600w,
+        {{ images.imageDesktop.src|resizeDynamic(1440, 640, images.imageDesktopCrop) }} 1440w,
+        {{ images.imageDesktop.src|resizeDynamic(1366, 640, images.imageDesktopCrop) }} 1366w,
+        {{ images.imageDesktop.src|resizeDynamic(1024, 640, images.imageDesktopCrop) }} 1024w"
+      media="(min-width: 768px)"
+      width="1024"
+      height="640"
+      loading="{{ loopIndex == 1 ? 'eager' : 'lazy' }}"
+      sizes="100vw">
+    <img
+      class="picture-image"
+      src="{{ images.imageMobile.src|resizeDynamic(768, 420, images.imageMobileCrop) }}"
+      srcset="
+        {{ images.imageMobile.src|resizeDynamic(768, 420, images.imageMobileCrop) }} 768w,
+        {{ images.imageMobile.src|resizeDynamic(640, 420, images.imageMobileCrop) }} 640w"
+      sizes="100vw"
+      width="768"
+      height="420"
+      loading="{{ loopIndex == 1 ? 'eager' : 'lazy' }}"
+      alt="{{ images.imageDesktop.alt|e }}">
+    {% else %}
+      <img
+        class="picture-image"
+        src="{{ images.imageDesktop.src|resizeDynamic(768, 420, images.imageDesktopCrop) }}"
+        srcset="
+          {{ images.imageDesktop.src|resizeDynamic(2560, 640, images.imageDesktopCrop) }} 2560w,
+          {{ images.imageDesktop.src|resizeDynamic(1920, 640, images.imageDesktopCrop) }} 1920w,
+          {{ images.imageDesktop.src|resizeDynamic(1600, 640, images.imageDesktopCrop) }} 1600w,
+          {{ images.imageDesktop.src|resizeDynamic(1440, 640, images.imageDesktopCrop) }} 1440w,
+          {{ images.imageDesktop.src|resizeDynamic(1366, 640, images.imageDesktopCrop) }} 1366w,
+          {{ images.imageDesktop.src|resizeDynamic(1024, 640, images.imageDesktopCrop) }} 1024w,
+          {{ images.imageDesktop.src|resizeDynamic(768, 420, images.imageDesktopCrop) }} 768w,
+          {{ images.imageDesktop.src|resizeDynamic(640, 420, images.imageDesktopCrop) }} 640w"
+        sizes="100vw"
+        width="768"
+        height="420"
+        loading="{{ loopIndex == 1 ? 'eager' : 'lazy' }}"
+        alt="{{ images.imageDesktop.alt|e }}">
+  {% endif %}
+</picture>

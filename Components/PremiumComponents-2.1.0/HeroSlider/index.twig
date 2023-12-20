@@ -1,0 +1,24 @@
+<flynt-component name="HeroSlider" load:on="visible">
+  <script type="application/json">{{ jsonData|json_encode }}</script>
+  <div data-ref="slider" data-slider class="slider swiper-container">
+    <div class="swiper-wrapper">
+      {% for slide in slides %}
+        <div data-refs="sliderItems" class="swiper-slide">
+          {% include "Partials/_picture.twig" with { images: slide.images, loopIndex: loop.index } %}
+          {% if slide.contentHtml %}
+            <div class="container">
+              <div class="content" data-size="full">
+                {{ slide.contentHtml|e('wp_kses_post') }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    {% if slides|length > 1 %}
+      <div data-ref="pagination" class="slider-pagination"></div>
+      <button type="button" data-ref="prev" class="slider-button slider-button--prev" aria-label="{{ sliderOptions.a11y.prevSlideMessage|e }}"></button>
+      <button type="button" data-ref="next" class="slider-button slider-button--next" aria-label="{{ sliderOptions.a11y.nextSlideMessage|e }}"></button>
+    {% endif %}
+  </div>
+</flynt-component>

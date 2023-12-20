@@ -1,0 +1,7 @@
+flynt-component[name='NavigationFooterColumns'] {
+  + flynt-component[name='NavigationFooter'] .container {
+    padding-block-start: 0;
+  }
+
+  @import 'Partials/menu';
+}

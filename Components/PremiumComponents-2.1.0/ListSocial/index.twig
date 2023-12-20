@@ -1,0 +1,20 @@
+<flynt-component name="ListSocial" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container">
+    <div data-size="medium" data-align="center" data-text-align="center">
+      {% if preContentHtml %}
+        {{ preContentHtml|e('wp_kses_post') }}
+      {% endif %}
+      {% if items %}
+        <ul class="items">
+          {% for item in items %}
+            <li class="item">
+              <a class="button item-link" href="{{ item.url|e('esc_url') }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.platform.label }}">
+                {{- item.icon -}}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</flynt-component>

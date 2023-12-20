@@ -1,0 +1,44 @@
+flynt-component[name='BlockCountUp'] {
+  .grid {
+    --grid-columns: 2;
+    --grid-gap: var(--flow-space);
+    --grid-item-width: calc((100% / var(--grid-columns)) - ((var(--grid-columns) - 1) / var(--grid-columns) * var(--grid-gap)));
+    --grid-item-max-width: calc((var(--content-max-width-full) / 3) - (2 / 3 * var(--grid-gap)));
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--grid-gap);
+    justify-content: center;
+    list-style: none;
+    margin-inline: auto;
+    padding: 0;
+    text-align: center;
+
+    @media (min-width: $breakpoint-tablet) {
+      --grid-columns: 3;
+    }
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      --grid-columns: 4;
+    }
+  }
+
+  .item {
+    inline-size: var(--grid-item-width);
+    max-inline-size: var(--grid-item-max-width);
+  }
+
+  .countValue {
+    margin-block-start: 0;
+  }
+
+  .figure {
+    block-size: 64px;
+    color: var(--color-accent);
+    display: grid;
+    inline-size: 64px;
+    margin-block-end: 0.5rem;
+    margin-inline: auto;
+    place-items: center;
+  }
+}

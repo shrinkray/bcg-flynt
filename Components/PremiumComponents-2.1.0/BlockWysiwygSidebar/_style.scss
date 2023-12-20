@@ -1,0 +1,36 @@
+flynt-component[name='BlockWysiwygSidebar'] {
+  .container {
+    @media (min-width: $breakpoint-tablet) {
+      display: grid;
+      gap: var(--container-spacing);
+      grid-template-areas: "sidebar content";
+      grid-template-columns: repeat(2, minmax(auto, max-content));
+      justify-content: center;
+    }
+
+    &[data-sidebar-position='right'] {
+      @media (min-width: $breakpoint-tablet) {
+        grid-template-areas: "content sidebar";
+      }
+    }
+  }
+
+  .sidebar {
+    margin-inline-start: 0;
+
+    @media (min-width: $breakpoint-tablet) {
+      flex-shrink: 0;
+      grid-area: sidebar;
+      max-inline-size: 200px;
+    }
+  }
+
+  .content {
+    max-inline-size: var(--content-max-width);
+
+    @media (min-width: $breakpoint-tablet) {
+      grid-area: content;
+      margin-block-start: 0;
+    }
+  }
+}
